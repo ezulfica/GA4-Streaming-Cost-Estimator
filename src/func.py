@@ -55,6 +55,7 @@ def calculate_costs(num_events, start_date, retention, params):
         "Ingestion Cost ($)": ingestion_cost,
         "Storage Cost ($)": storage_cost_gb,
     })
+    df["date"] = df["date"].astype(str)
     df["Compute Cost ($)"] = df.apply(lambda x: params['compute_cost'](x["Storage (GB)"], date=x["date"]), axis=1)
     df["Period"] = df["date"].astype(str).str[:7]
     df["year"] = df["date"].astype(str).str[:4]
